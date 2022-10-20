@@ -41,11 +41,11 @@ export default function Dashboard({ history }) {
     if (!token) {
       history.push('/login')
     } else {
-      setToken(token)
+      setToken(token, getProduct(token))
     }
   }, [])
 
-  const getProduct = () => {
+  const getProduct = (token) => {
     setLoading(true)
 
     let data = '?'
@@ -60,6 +60,7 @@ export default function Dashboard({ history }) {
         }
       })
       .then((res) => {
+        console.log(res)
         setLoading(false)
         setProducts(res.data.products)
         setPages(res.data.pages)
