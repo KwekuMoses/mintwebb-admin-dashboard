@@ -16,26 +16,20 @@ import {
 } from '@material-ui/core'
 import { Pagination } from '@material-ui/lab'
 import swal from 'sweetalert'
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
+import {UserContext} from './App'
+import getUserRole from './Login'
 const axios = require('axios')
 
-export default function Dashboard({ history }) {
+export default function Dashboard({history}) {
   const [token, setToken] = useState('')
-  const [openProductModal, setOpenProductModal] = useState(false)
-  const [openProductEditModal, setOpenProductEditModal] = useState(false)
-  const [id, setId] = useState('')
-  const [name, setName] = useState('')
-  const [desc, setDesc] = useState('')
-  const [price, setPrice] = useState('')
-  const [discount, setDiscount] = useState('')
-  const [file, setFile] = useState('')
-  const [fileName, setFileName] = useState('')
+
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
   const [products, setProducts] = useState([])
   const [pages, setPages] = useState(0)
   const [loading, setLoading] = useState(false)
-
+  const [role,setRole] = useState('')
   useEffect(() => {
     let token = localStorage.getItem('token')
     if (!token) {
@@ -43,6 +37,8 @@ export default function Dashboard({ history }) {
     } else {
       setToken(token, getProduct(token))
     }
+    setRole(history.location.role)
+    axios.get('/')
   }, [])
 
   const getProduct = (token) => {
@@ -60,14 +56,11 @@ export default function Dashboard({ history }) {
         }
       })
       .then((res) => {
-        console.log(res)
         setLoading(false)
         setProducts(res.data.products)
         setPages(res.data.pages)
-        console.log('1')
       })
       .catch((err) => {
-        console.log('2')
         swal({
           text: err.response.data.errorMessage,
           icon: 'error',
@@ -84,11 +77,16 @@ export default function Dashboard({ history }) {
     history.push('/')
   }
 
+  
+
   return (
     <div>
+      {role === 'superadmin' &&<p>WEEEEEE SUPERADMIN</p>}
+      {role === 'admin' &&<p>ADMIN</p>}
       {loading && <LinearProgress size={40} />}
       <div>
         <h2>Dashboard</h2>
+        <p>{role}</p>
         <Button onClick={getProduct}>get</Button>
         <Button
           className='button_style'

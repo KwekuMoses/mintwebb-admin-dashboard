@@ -174,7 +174,8 @@ function checkUserAndGenerateToken(data, req, res) {
         res.json({
           message: 'Login Successfully.',
           token: token,
-          status: true
+          status: true,
+          role: data.role
         })
       }
     }
