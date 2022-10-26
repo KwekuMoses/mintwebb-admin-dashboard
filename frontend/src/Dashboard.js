@@ -17,11 +17,11 @@ import {
 import { Pagination } from '@material-ui/lab'
 import swal from 'sweetalert'
 import { useEffect, useContext } from 'react'
-import {UserContext} from './App'
+import { UserContext } from './App'
 import getUserRole from './Login'
 const axios = require('axios')
 
-export default function Dashboard({history}) {
+export default function Dashboard({ history }) {
   const [token, setToken] = useState('')
 
   const [page, setPage] = useState(1)
@@ -29,17 +29,29 @@ export default function Dashboard({history}) {
   const [products, setProducts] = useState([])
   const [pages, setPages] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [role,setRole] = useState('')
+  const [role, setRole] = useState('')
   useEffect(() => {
     let token = localStorage.getItem('token')
     if (!token) {
       history.push('/login')
     } else {
-      setToken(token, getProduct(token))
+      setToken(token, getProduct(token), getRole(token))
     }
-    setRole(history.location.role)
+    // setRole(history.location.role)
     axios.get('/')
   }, [])
+
+  const getRole = (token) => {
+    axios.get('http://localhost:2000/get-role', {
+      headers: {
+        token: token
+      }
+    }).then((data) => {
+      setRole(data.data.the_user.role)
+    })
+  }
+
+  // getRole(token)
 
   const getProduct = (token) => {
     setLoading(true)
@@ -77,12 +89,12 @@ export default function Dashboard({history}) {
     history.push('/')
   }
 
-  
+
 
   return (
     <div>
-      {role === 'superadmin' &&<p>WEEEEEE SUPERADMIN</p>}
-      {role === 'admin' &&<p>ADMIN</p>}
+      {role === 'superadmin' && <p>WEEEEEE SUPERADMIN</p>}
+      {role === 'admin' && <p>ADMIN</p>}
       {loading && <LinearProgress size={40} />}
       <div>
         <h2>Dashboard</h2>

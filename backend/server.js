@@ -331,6 +331,34 @@ app.post('/delete-product', (req, res) => {
   }
 })
 
+app.get('/get-role', async (req, res) => {
+
+  // console.log(req.user.id)
+  const the_user = await user.findById(req.user.id);
+  res.json({
+    success: true,
+    the_user,
+  });
+
+  console.log(res)
+  // user
+  //   .find(
+  //     users,
+  //     { $pull: { tasks: { _id: taskId } } },
+  //     {
+  //       useFindAndModify: false,
+  //     }
+  //   )
+  //   .exec((error) => {
+  //     if (error) {
+  //       return handleError(error);
+  //     }
+  //   });
+
+  // res.end("Customer was updated");
+
+})
+
 /*Api to get and search product with pagination and search by name*/
 app.get('/get-product', (req, res) => {
   try {
