@@ -1,7 +1,7 @@
-import React, { useState,  useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import swal from 'sweetalert'
 import { Button, TextField, Link } from '@material-ui/core'
-import {UserContext} from './App'
+import { UserContext } from './App'
 const axios = require('axios')
 const bcrypt = require('bcryptjs')
 
@@ -9,23 +9,24 @@ var salt = bcrypt.genSaltSync(10)
 
 
 
-export default function Login({history} ) {
+export default function Login({ history }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const login = () => {
     const pwd = bcrypt.hashSync(password, salt)
     axios
-      .post('http://localhost:2000/login', {
+      .post('/login', {
         username: username,
         password: pwd
       })
       .then((res) => {
         localStorage.setItem('token', res.data.token)
         localStorage.setItem('user_id', res.data.id)
-        history.push({pathname: '/dashboard',
+        history.push({
+          pathname: '/dashboard',
           role: res.data.role,
         })
-      
+
       })
       .catch((err) => {
         if (

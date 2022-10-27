@@ -42,12 +42,14 @@ export default function Dashboard({ history }) {
   }, [])
 
   const getRole = (token) => {
-    axios.get('http://localhost:2000/get-role', {
+    axios.get('/get-role', {
       headers: {
         token: token
       }
     }).then((data) => {
       setRole(data.data.the_user.role)
+    }).catch((err) => {
+      console.log(err)
     })
   }
 
