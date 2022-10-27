@@ -37,7 +37,6 @@ export default function Dashboard({ history }) {
     } else {
       setToken(token, getProduct(token), getRole(token))
     }
-    // setRole(history.location.role)
     axios.get('/')
   }, [])
 
