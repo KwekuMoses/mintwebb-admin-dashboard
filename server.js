@@ -7,10 +7,12 @@ var multer = require('multer'),
   bodyParser = require('body-parser'),
   path = require('path')
 var mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://kweku:mongodb@cluster.8uxr5.mongodb.net/test')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://kweku:mongodb@cluster.8uxr5.mongodb.net/test')
 var fs = require('fs')
 var product = require('./model/product.js')
 var user = require('./model/user.js')
+
+const PORT = process.env.PORT || 2000
 
 var dir = './uploads'
 var upload = multer({
@@ -423,6 +425,11 @@ app.get('/get-product', (req, res) => {
   }
 })
 
-app.listen(2000, () => {
-  console.log('Server is Runing On port 2000')
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'))
+}
+console.log(PORT)
+app.listen(PORT, () => {
+  console.log(`Server is Runing On ${PORT}`)
 })
