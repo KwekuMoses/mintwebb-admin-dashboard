@@ -47,6 +47,8 @@ export default function Dashboard({ history }) {
       }
     }).then((data) => {
       setRole(data.data.the_user.role)
+      setLoading(false)
+
     }).catch((err) => {
       console.log(err)
     })
@@ -79,7 +81,6 @@ export default function Dashboard({ history }) {
     //       icon: 'error',
     //       type: 'error'
     //     })
-    //     setLoading(false)
     //     setProducts([])
     //     setPages(0)
     //   })

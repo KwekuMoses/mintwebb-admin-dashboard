@@ -49,7 +49,7 @@ app.use(
   })
 )
 
-app.use('*', (req, res, next) => {
+app.use('/', (req, res, next) => {
   try {
     if (req.path == '/login' || req.path == '/register' || req.path == '/') {
       next()
@@ -75,7 +75,7 @@ app.use('*', (req, res, next) => {
   }
 })
 
-app.get('/status', (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json({
     status: true,
     title: 'Apis'
@@ -333,10 +333,10 @@ app.post('/delete-product', (req, res) => {
   }
 })
 
-app.get('/get-role', (req, res) => {
+app.get('/get-role', async (req, res) => {
 
   // console.log(req.user.id)
-  const the_user = user.findById(req.user.id);
+  const the_user = await user.findById(req.user.id);
   res.json({
     success: true,
     the_user,
