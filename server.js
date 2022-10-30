@@ -333,10 +333,10 @@ app.post('/delete-product', (req, res) => {
   }
 })
 
-app.get('/get-role', async (req, res) => {
+app.get('/get-role', (req, res) => {
 
   // console.log(req.user.id)
-  const the_user = await user.findById(req.user.id);
+  const the_user = user.findById(req.user.id);
   res.json({
     success: true,
     the_user,
