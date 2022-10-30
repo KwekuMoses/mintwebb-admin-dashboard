@@ -57,11 +57,11 @@ export default function Dashboard({ history }) {
   const getProduct = (token) => {
     setLoading(true)
 
-    let data = '?'
-    data = `${data}page=${page}`
-    if (search) {
-      data = `${data}&search=${search}`
-    }
+    // let data = '?'
+    // data = `${data}page=${page}`
+    // if (search) {
+    //   data = `${data}&search=${search}`
+    // }
     // axios
     //   .get(`http://localhost:2000/get-product${data}`, {
     //     headers: {
