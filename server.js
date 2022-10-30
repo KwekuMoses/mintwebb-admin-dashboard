@@ -49,7 +49,7 @@ app.use(
   })
 )
 
-app.use('/', (req, res, next) => {
+app.get('/', (req, res, next) => {
   try {
     if (req.path == '/login' || req.path == '/register' || req.path == '/') {
       next()
