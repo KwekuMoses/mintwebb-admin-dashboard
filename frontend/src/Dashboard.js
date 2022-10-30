@@ -41,7 +41,7 @@ export default function Dashboard({ history }) {
   }, [])
 
   const getRole = (token) => {
-    axios.get('/get-role', {
+    axios.get('https://mintwebb-admin.herokuapp.com/get-role', {
       headers: {
         token: token
       }
