@@ -62,27 +62,27 @@ export default function Dashboard({ history }) {
     if (search) {
       data = `${data}&search=${search}`
     }
-    axios
-      .get(`http://localhost:2000/get-product${data}`, {
-        headers: {
-          token: token
-        }
-      })
-      .then((res) => {
-        setLoading(false)
-        setProducts(res.data.products)
-        setPages(res.data.pages)
-      })
-      .catch((err) => {
-        swal({
-          text: err.response.data.errorMessage,
-          icon: 'error',
-          type: 'error'
-        })
-        setLoading(false)
-        setProducts([])
-        setPages(0)
-      })
+    // axios
+    //   .get(`http://localhost:2000/get-product${data}`, {
+    //     headers: {
+    //       token: token
+    //     }
+    //   })
+    //   .then((res) => {
+    //     setLoading(false)
+    //     setProducts(res.data.products)
+    //     setPages(res.data.pages)
+    //   })
+    //   .catch((err) => {
+    //     swal({
+    //       text: err.response.data.errorMessage,
+    //       icon: 'error',
+    //       type: 'error'
+    //     })
+    //     setLoading(false)
+    //     setProducts([])
+    //     setPages(0)
+    //   })
   }
 
   const logOut = () => {
@@ -140,11 +140,11 @@ export default function Dashboard({ history }) {
                   {row.name}
                 </TableCell>
                 <TableCell align='center'>
-                  <img
+                  {/* <img
                     src={`http://localhost:2000/${row.image}`}
                     width='70'
                     height='70'
-                  />
+                  /> */}
                 </TableCell>
                 <TableCell align='center'>{row.desc}</TableCell>
                 <TableCell align='center'>{row.price}</TableCell>
