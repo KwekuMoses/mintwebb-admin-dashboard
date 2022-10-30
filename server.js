@@ -39,7 +39,9 @@ var upload = multer({
     callback(null, true)
   }
 })
-app.use(cors())
+app.use(cors(
+  "Access-Control-Allow-Origin", "*"
+))
 app.use(express.static('uploads'))
 app.use(bodyParser.json()) // to support JSON-encoded bodies
 app.use(
