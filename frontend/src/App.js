@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Routes, Redirect, Route } from 'react-router';
+import { Switch, Redirect, Route } from 'react-router';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { useState, createContext, useContext } from "react";
 import Login from './Login';
@@ -19,12 +19,12 @@ function App() {
 
 
         <BrowserRouter>
-            <Routes>
+            <Switch>
                 <Route exact path='/' component={Login} />
                 <Route exact path='/register' component={Register} />
                 <Route path='/dashboard' component={Dashboard} user={user} />
                 {/* <Route component={NotFound}/> */}
-            </Routes>
+            </Switch>
         </BrowserRouter>
     );
 
