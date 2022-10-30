@@ -75,12 +75,12 @@ app.use('/', (req, res, next) => {
   }
 })
 
-app.get('/', (req, res) => {
-  res.status(200).json({
-    status: true,
-    title: 'Apis'
-  })
-})
+// app.get('/', (req, res) => {
+//   res.status(200).json({
+//     status: true,
+//     title: 'Apis'
+//   })
+// })
 
 /* login api */
 app.post('/login', (req, res) => {
