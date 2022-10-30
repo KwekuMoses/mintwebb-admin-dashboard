@@ -49,7 +49,7 @@ app.use(
   })
 )
 
-app.use('/', (req, res, next) => {
+app.get('/', (req, res, next) => {
   try {
     if (req.path == '/login' || req.path == '/register' || req.path == '/') {
       next()
@@ -75,12 +75,12 @@ app.use('/', (req, res, next) => {
   }
 })
 
-app.get('/', (req, res) => {
-  // res.status(200).json({
-  //   status: true,
-  //   title: 'Apis'
-  // })
-})
+// app.get('/', (req, res) => {
+//   res.status(200).json({
+//     status: true,
+//     title: 'Apis'
+//   })
+// })
 
 /* login api */
 app.post('/login', (req, res) => {
@@ -333,32 +333,44 @@ app.post('/delete-product', (req, res) => {
   }
 })
 
-app.get('/get-role', async (req, res) => {
+app.get('/role', (req, res) => {
+  jwt.verify(req.headers.token, 'shhhhh11111', async function (err, decoded) {
+    if (decoded && decoded.user) {
 
-  // console.log(req.user.id)
-  const the_user = await user.findById(req.user.id);
-  res.json({
-    success: true,
-    the_user,
-  });
+      req.user = decoded
+      const the_user = await user.findById(req.user.id);
 
-  console.log(res)
-  // user
-  //   .find(
-  //     users,
-  //     { $pull: { tasks: { _id: taskId } } },
-  //     {
-  //       useFindAndModify: false,
-  //     }
-  //   )
-  //   .exec((error) => {
-  //     if (error) {
-  //       return handleError(error);
-  //     }
-  //   });
+      res.json({
+        success: true,
+        the_user,
+      });
+    } else {
+      return res.status(401).json({
+        errorMessage: 'User unauthorized!',
+        status: false
+      })
+    }
+  }
 
-  // res.end("Customer was updated");
+    // console.log(req.user.id)
 
+    // user
+    //   .find(
+    //     users,
+    //     { $pull: { tasks: { _id: taskId } } },
+    //     {
+    //       useFindAndModify: false,
+    //     }
+    //   )
+    //   .exec((error) => {
+    //     if (error) {
+    //       return handleError(error);
+    //     }
+    //   });
+
+    // res.end("Customer was updated");
+
+  )
 })
 
 /*Api to get and search product with pagination and search by name*/
