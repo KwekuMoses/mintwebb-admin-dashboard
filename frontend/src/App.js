@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Redirect, Route } from 'react-router';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Redirect, Route } from 'react-router';
+import { Switch, BrowserRouter, Link } from 'react-router-dom';
 import { useState, createContext, useContext } from "react";
 import Login from './Login';
 import Register from './Register';
