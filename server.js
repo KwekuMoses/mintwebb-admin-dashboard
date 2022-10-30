@@ -49,7 +49,7 @@ app.use(
   })
 )
 
-app.use('/', (req, res, next) => {
+app.use('*', (req, res, next) => {
   try {
     if (req.path == '/login' || req.path == '/register' || req.path == '/') {
       next()
@@ -75,30 +75,11 @@ app.use('/', (req, res, next) => {
   }
 })
 
-app.get('/', (req, res) => {
-  try {
-    if (req.path == '/login' || req.path == '/register' || req.path == '/') {
-      next()
-    } else {
-      /* decode jwt token if authorized*/
-      jwt.verify(req.headers.token, 'shhhhh11111', function (err, decoded) {
-        if (decoded && decoded.user) {
-          req.user = decoded
-          next()
-        } else {
-          return res.status(401).json({
-            errorMessage: 'User unauthorized!',
-            status: false
-          })
-        }
-      })
-    }
-  } catch (e) {
-    res.status(400).json({
-      errorMessage: 'Something went wrong!',
-      status: false
-    })
-  }
+app.get('/status', (req, res) => {
+  res.status(200).json({
+    status: true,
+    title: 'Apis'
+  })
 })
 
 /* login api */
@@ -448,7 +429,6 @@ app.get('/get-product', (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'))
 }
-console.log(PORT)
 app.listen(PORT, () => {
   console.log(`Server is Runing On ${PORT}`)
 })
