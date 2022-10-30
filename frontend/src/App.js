@@ -22,7 +22,7 @@ function App() {
                 <Route exact path='/' component={Login} />
                 <Route exact path='/register' component={Register} />
                 <Route path='/dashboard' component={Dashboard} user={user} />
-                {/* <Route component={NotFound}/> */}
+                {/* <Route component={NotFound}/>  */}
             </Switch>
         </BrowserRouter>
     );
