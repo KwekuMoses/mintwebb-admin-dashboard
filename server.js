@@ -11,6 +11,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://kweku:mongodb@cluster
 var fs = require('fs')
 var product = require('./model/product.js')
 var user = require('./model/user.js')
+var visit = require('./model/visit.js')
 
 const PORT = process.env.PORT || 2000
 
@@ -75,12 +76,14 @@ app.get('/', (req, res, next) => {
   }
 })
 
-// app.get('/', (req, res) => {
-//   res.status(200).json({
-//     status: true,
-//     title: 'Apis'
-//   })
-// })
+app.get('/', (req, res) => {
+
+
+  // res.status(200).json({
+  //   status: true,
+  //   title: 'Apis'
+  // })
+})
 
 /* login api */
 app.post('/login', (req, res) => {
@@ -333,7 +336,42 @@ app.post('/delete-product', (req, res) => {
   }
 })
 
+app.post('/stats', (req, res) => {
+  console.log(req.body.data.catalog)
+  let catalog = req.body.data.catalog
+  visit.find({ catalog: catalog }).then((data) => {
+    res.status(200).json({
+      data: data,
+    })
+  })
+
+
+  // console.log(req.user.id)
+
+  // user
+  //   .find(
+  //     users,
+  //     { $pull: { tasks: { _id: taskId } } },
+  //     {
+  //       useFindAndModify: false,
+  //     }
+  //   )
+  //   .exec((error) => {
+  //     if (error) {
+  //       return handleError(error);
+  //     }
+  //   });
+
+  // res.end("Customer was updated");
+
+
+})
 app.get('/role', (req, res) => {
+
+  // console.log("1")
+  // visit.find({ catalog: "testCatalog" }).then((res) => {
+  //   console.log(res)
+  // })
   jwt.verify(req.headers.token, 'shhhhh11111', async function (err, decoded) {
     if (decoded && decoded.user) {
 

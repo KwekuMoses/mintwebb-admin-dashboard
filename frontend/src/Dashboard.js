@@ -19,27 +19,52 @@ import swal from 'sweetalert'
 import { useEffect, useContext } from 'react'
 import { UserContext } from './App'
 import getUserRole from './Login'
+import './Dashboard.css'
+import Chart from './Chart'
+
 const axios = require('axios')
 
 export default function Dashboard({ history }) {
   const [token, setToken] = useState('')
-
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
   const [products, setProducts] = useState([])
   const [pages, setPages] = useState(0)
   const [loading, setLoading] = useState(false)
   const [role, setRole] = useState('')
+  const [catalog, setCatalog] = useState('')
+  const [catalogVisits, setCatalogVisits] = useState('')
+
+
   useEffect(() => {
     let token = localStorage.getItem('token')
     if (!token) {
       history.push('/login')
     } else {
-      setToken(token, getProduct(token), getRole(token))
+      setToken(token, getProduct(token), getRole(token), postStats(token, catalog))
     }
     axios.get('/')
-  }, [])
+  }, [catalog])
 
+
+
+
+  const postStats = (token, catalog) => {
+    axios.post('/stats', {
+      data: {
+        catalog: catalog
+      },
+      headers: {
+        token: token
+      }
+
+    }).then((data) => {
+      setCatalogVisits(data.data)
+
+    }).catch((err) => {
+      console.log(err.response.data)
+    })
+  }
   const getRole = (token) => {
     axios.get('/role', {
       headers: {
@@ -48,43 +73,19 @@ export default function Dashboard({ history }) {
 
     }).then((data) => {
       setRole(data.data.the_user.role)
+      setCatalog(data.data.the_user.catalog)
       setLoading(false)
 
     }).catch((err) => {
       console.log(err.response.data)
     })
   }
-
+  console.log(catalogVisits)
   // getRole(token)
 
   const getProduct = (token) => {
     setLoading(true)
 
-    // let data = '?'
-    // data = `${data}page=${page}`
-    // if (search) {
-    //   data = `${data}&search=${search}`
-    // }
-    // axios
-    //   .get(`http://localhost:2000/get-product${data}`, {
-    //     headers: {
-    //       token: token
-    //     }
-    //   })
-    //   .then((res) => {
-    //     setLoading(false)
-    //     setProducts(res.data.products)
-    //     setPages(res.data.pages)
-    //   })
-    //   .catch((err) => {
-    //     swal({
-    //       text: err.response.data.errorMessage,
-    //       icon: 'error',
-    //       type: 'error'
-    //     })
-    //     setProducts([])
-    //     setPages(0)
-    //   })
   }
 
   const logOut = () => {
@@ -93,13 +94,10 @@ export default function Dashboard({ history }) {
   }
 
 
-
   return (
-    <div>
-      {role === 'superadmin' && <p>WEEEEEE SUPERADMIN</p>}
-      {role === 'admin' && <p>ADMIN</p>}
+    <div className="Dashboard">
       {loading && <LinearProgress size={40} />}
-      <div>
+      <nav className="Navbar">
         <h2>Dashboard</h2>
         <p>{role}</p>
         <Button onClick={getProduct}>get</Button>
@@ -111,52 +109,11 @@ export default function Dashboard({ history }) {
         >
           Log Out
         </Button>
-      </div>
-      <br />
-      <TableContainer>
-        <TextField
-          id='standard-basic'
-          type='search'
-          autoComplete='off'
-          name='search'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder='Search by product name'
-          required
-        />
-        <Table aria-label='simple table'>
-          <TableHead>
-            <TableRow>
-              <TableCell align='center'>Name</TableCell>
-              <TableCell align='center'>Image</TableCell>
-              <TableCell align='center'>Description</TableCell>
-              <TableCell align='center'>Price</TableCell>
-              <TableCell align='center'>Discount</TableCell>
-              <TableCell align='center'>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell align='center' component='th' scope='row'>
-                  {row.name}
-                </TableCell>
-                <TableCell align='center'>
-                  {/* <img
-                    src={`http://localhost:2000/${row.image}`}
-                    width='70'
-                    height='70'
-                  /> */}
-                </TableCell>
-                <TableCell align='center'>{row.desc}</TableCell>
-                <TableCell align='center'>{row.price}</TableCell>
-                <TableCell align='center'>{row.discount}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <br />
-      </TableContainer>
+        {role === 'superadmin' && <p>superadmin</p>}
+        {role === 'admin' && <p>admin</p>}
+      </nav>
+      <Chart catalog={catalog} catalogVisits={catalogVisits} />
+
     </div>
   )
 }
