@@ -1,35 +1,35 @@
 import React, { useState } from 'react'
 import {
   Button,
-  TextField,
-  Dialog,
-  DialogActions,
+  // TextField,
+  // Dialog,
+  // DialogActions,
   LinearProgress,
-  DialogTitle,
-  DialogContent,
-  TableBody,
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell
+  // DialogTitle,
+  // DialogContent,
+  // TableBody,
+  // Table,
+  // TableContainer,
+  // TableHead,
+  // TableRow,
+  // TableCell
 } from '@material-ui/core'
-import { Pagination } from '@material-ui/lab'
-import swal from 'sweetalert'
+// import { Pagination } from '@material-ui/lab'
+// import swal from 'sweetalert'
 import { useEffect, useContext } from 'react'
-import { UserContext } from './App'
-import getUserRole from './Login'
+// import { UserContext } from './App'
+// import getUserRole from './Login'
 import './Dashboard.css'
-import Chart from './Chart'
+import StatisticModule from './StatisticModule'
 
 const axios = require('axios')
 
 export default function Dashboard({ history }) {
   const [token, setToken] = useState('')
-  const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
-  const [products, setProducts] = useState([])
-  const [pages, setPages] = useState(0)
+  // const [page, setPage] = useState(1)
+  // const [search, setSearch] = useState('')
+  // const [products, setProducts] = useState([])
+  // const [pages, setPages] = useState(0)
   const [loading, setLoading] = useState(false)
   const [role, setRole] = useState('')
   const [catalog, setCatalog] = useState('')
@@ -80,7 +80,6 @@ export default function Dashboard({ history }) {
       console.log(err.response.data)
     })
   }
-  console.log(catalogVisits)
   // getRole(token)
 
   const getProduct = (token) => {
@@ -112,7 +111,7 @@ export default function Dashboard({ history }) {
         {role === 'superadmin' && <p>superadmin</p>}
         {role === 'admin' && <p>admin</p>}
       </nav>
-      <Chart catalog={catalog} catalogVisits={catalogVisits} />
+      <StatisticModule catalog={catalog} catalogVisits={catalogVisits} />
 
     </div>
   )

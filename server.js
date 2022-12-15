@@ -344,27 +344,6 @@ app.post('/stats', (req, res) => {
       data: data,
     })
   })
-
-
-  // console.log(req.user.id)
-
-  // user
-  //   .find(
-  //     users,
-  //     { $pull: { tasks: { _id: taskId } } },
-  //     {
-  //       useFindAndModify: false,
-  //     }
-  //   )
-  //   .exec((error) => {
-  //     if (error) {
-  //       return handleError(error);
-  //     }
-  //   });
-
-  // res.end("Customer was updated");
-
-
 })
 app.get('/role', (req, res) => {
 
