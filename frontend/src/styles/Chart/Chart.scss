@@ -1,0 +1,52 @@
+@import '../Variables.scss';
+
+
+.Chart {
+    display: grid;
+    grid-template-columns: $gridColumns;
+    grid-gap: $gridGap;
+
+    tspan {
+        font-family: $fontCourier;
+        color: #000AFF !important;
+    }
+
+
+    &__DataTitle {
+        font-family: $fontArchivo;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    &__ButtonGroup {
+        grid-column: 1;
+        display: grid;
+        place-items: center end;
+        border-bottom: 1px solid black;
+        width: max-content;
+        place-self: start end;
+        padding-bottom: 20px;
+    }
+
+    &__Button {
+        border: 1px solid black;
+        background-color: $buttonBackground;
+        font-family: $fontArchivo;
+        text-transform: uppercase;
+        padding: 10px;
+        font-size: 10px;
+        margin-bottom: 15px;
+
+        &:hover {
+            background-color: #fff;
+            cursor: pointer;
+        }
+    }
+
+    &__Chart {
+        grid-column: 2;
+    }
+
+
+
+}

@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+}
+
+.Dashboard {
+  background-color: #FFDFE7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}

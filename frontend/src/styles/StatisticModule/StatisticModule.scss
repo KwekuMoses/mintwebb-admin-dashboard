@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+@import '../Variables.scss';
+
+.StatisticModule {
+    margin-top: 100px;
+
+    &__Overview {
+        display: grid;
+        grid-template-columns: $gridColumns;
+        grid-gap: $gridGap;
+        margin-bottom: 100px;
+    }
+
+
+    &__CatalogName {
+        // color: #000AFF;
+        color: #000;
+        font-size: 36px;
+        font-family: 'Bungee Shade', cursive;
+        width: max-content;
+        place-self: center end;
+    }
+
+    &__StatlineWrapper {
+        place-self: center;
+        grid-column: 2;
+        display: flex;
+        gap: 40px;
+    }
+
+    &__Statline {
+        background-color: #dadada77;
+        display: grid;
+        width: max-content;
+        height: max-content;
+        padding: 15px;
+    }
+
+    &__Text {
+        place-self: center end;
+        text-transform: uppercase;
+        font-family: $fontArchivo;
+
+    }
+
+    &__Number {
+        place-self: start end;
+        font-family: $fontCourier;
+    }
+
+
+}

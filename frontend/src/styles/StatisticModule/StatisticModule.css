@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
+.StatisticModule {
+  margin-top: 100px;
+}
+.StatisticModule__Overview {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-gap: 50px;
+  margin-bottom: 100px;
+}
+.StatisticModule__CatalogName {
+  color: #000;
+  font-size: 36px;
+  font-family: "Bungee Shade", cursive;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  place-self: center end;
+}
+.StatisticModule__StatlineWrapper {
+  place-self: center;
+  grid-column: 2;
+  display: flex;
+  gap: 40px;
+}
+.StatisticModule__Statline {
+  background-color: rgba(218, 218, 218, 0.4666666667);
+  display: grid;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 15px;
+}
+.StatisticModule__Text {
+  place-self: center end;
+  text-transform: uppercase;
+  font-family: "Archivo Black", sans-serif;
+}
+.StatisticModule__Number {
+  place-self: start end;
+  font-family: "Courier New", Courier, monospace;
+}

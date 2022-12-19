@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
+.Navbar {
+  background: black;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  justify-items: space-between;
+  font-family: "Archivo Black", sans-serif;
+}
+.Navbar__Title {
+  color: white;
+  text-transform: uppercase;
+  margin-left: 100px;
+}
+.Navbar__Button {
+  width: 110px;
+  height: 36px;
+  border: 2px solid white;
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  position: absolute;
+  right: 10px;
+}
+.Navbar__Button:hover {
+  background-color: rgba(255, 255, 255, 0.342);
+}

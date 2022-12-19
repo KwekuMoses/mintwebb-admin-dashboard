@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+}
+
+.Dashboard {
+    $root: &;
+    background-color: #FFDFE7;
+    min-height: 100vh;
+    overflow-x: hidden;
+}

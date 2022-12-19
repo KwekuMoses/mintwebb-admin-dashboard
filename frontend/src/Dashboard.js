@@ -19,17 +19,14 @@ import {
 import { useEffect, useContext } from 'react'
 // import { UserContext } from './App'
 // import getUserRole from './Login'
-import './Dashboard.css'
+import './styles/Dashboard/Dashboard.css'
 import StatisticModule from './StatisticModule'
+import Navbar from './Navbar'
 
 const axios = require('axios')
 
 export default function Dashboard({ history }) {
   const [token, setToken] = useState('')
-  // const [page, setPage] = useState(1)
-  // const [search, setSearch] = useState('')
-  // const [products, setProducts] = useState([])
-  // const [pages, setPages] = useState(0)
   const [loading, setLoading] = useState(false)
   const [role, setRole] = useState('')
   const [catalog, setCatalog] = useState('')
@@ -45,8 +42,6 @@ export default function Dashboard({ history }) {
     }
     axios.get('/')
   }, [catalog])
-
-
 
 
   const postStats = (token, catalog) => {
@@ -65,6 +60,7 @@ export default function Dashboard({ history }) {
       console.log(err.response.data)
     })
   }
+
   const getRole = (token) => {
     axios.get('/role', {
       headers: {
@@ -84,7 +80,6 @@ export default function Dashboard({ history }) {
 
   const getProduct = (token) => {
     setLoading(true)
-
   }
 
   const logOut = () => {
@@ -92,27 +87,13 @@ export default function Dashboard({ history }) {
     history.push('/')
   }
 
-
   return (
     <div className="Dashboard">
       {loading && <LinearProgress size={40} />}
-      <nav className="Navbar">
-        <h2>Dashboard</h2>
-        <p>{role}</p>
-        <Button onClick={getProduct}>get</Button>
-        <Button
-          className='button_style'
-          variant='contained'
-          size='small'
-          onClick={logOut}
-        >
-          Log Out
-        </Button>
-        {role === 'superadmin' && <p>superadmin</p>}
-        {role === 'admin' && <p>admin</p>}
-      </nav>
+      <Navbar logOut={logOut} />
       <StatisticModule catalog={catalog} catalogVisits={catalogVisits} />
-
+      {/* {role === 'superadmin' && <p>superadmin</p>}
+        {role === 'admin' && <p>admin</p>} */}
     </div>
   )
 }

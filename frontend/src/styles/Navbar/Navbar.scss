@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import '../Variables.scss';
+
+.Navbar {
+    $root: &;
+    background: black;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 80px;
+    justify-items: space-between;
+    font-family: $fontArchivo;
+
+
+    &__Title {
+        color: white;
+        text-transform: uppercase;
+        margin-left: 100px;
+    }
+
+    &__Button {
+        width: 110px;
+        height: 36px;
+        border: 2px solid white;
+        background-color: black;
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.6rem;
+        position: absolute;
+        right: 10px;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.342);
+        }
+    }
+}
