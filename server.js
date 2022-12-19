@@ -337,7 +337,6 @@ app.post('/delete-product', (req, res) => {
 })
 
 app.post('/stats', (req, res) => {
-  console.log(req.body.data.catalog)
   let catalog = req.body.data.catalog
   visit.find({ catalog: catalog }).then((data) => {
     res.status(200).json({
