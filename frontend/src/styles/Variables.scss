@@ -5,3 +5,31 @@ $fontCourier: 'Courier New', Courier, monospace;
 $gridColumns: 30% 70%;
 $gridGap: 50px;
 $buttonBackground: rgba(255, 255, 255, 0.5);
+
+@mixin Button {
+    border: 1px solid black;
+    background-color: $buttonBackground;
+    font-family: $fontArchivo;
+    text-transform: uppercase;
+    padding: 10px;
+    font-size: 10px;
+    margin-bottom: 15px;
+
+    border: 1px solid black;
+    background-color: $buttonBackground;
+    font-family: $fontArchivo;
+    text-transform: uppercase;
+    padding: 10px;
+    font-size: 10px;
+    margin-bottom: 15px;
+
+
+
+    &:hover {
+        background-color: #fff;
+        cursor: pointer;
+        box-shadow: 5px 5px rgba(255, 255, 255, 0.945);
+
+    }
+
+}

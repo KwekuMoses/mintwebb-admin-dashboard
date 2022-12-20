@@ -18,6 +18,11 @@
         margin-bottom: 15px;
     }
 
+    &__ViewingLabel {
+        font-family: $fontArchivo;
+        text-transform: uppercase;
+    }
+
     &__ButtonGroup {
         grid-column: 1;
         display: grid;
@@ -29,17 +34,13 @@
     }
 
     &__Button {
-        border: 1px solid black;
-        background-color: $buttonBackground;
-        font-family: $fontArchivo;
-        text-transform: uppercase;
-        padding: 10px;
-        font-size: 10px;
-        margin-bottom: 15px;
+        @include Button;
 
-        &:hover {
+        &--active {
             background-color: #fff;
-            cursor: pointer;
+            border: 1px solid blue;
+            color: blue;
+            box-shadow: 5px 5px rgba(255, 255, 255, 0.945);
         }
     }
 

@@ -1,0 +1,10 @@
+@import '../Variables.scss';
+
+
+.SwitchButton {
+    @include Button;
+
+    &:active {
+        color: blue;
+    }
+}

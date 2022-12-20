@@ -13,6 +13,10 @@
   text-transform: uppercase;
   margin-bottom: 15px;
 }
+.Chart__ViewingLabel {
+  font-family: "Archivo Black", sans-serif;
+  text-transform: uppercase;
+}
 .Chart__ButtonGroup {
   grid-column: 1;
   display: grid;
@@ -32,10 +36,24 @@
   padding: 10px;
   font-size: 10px;
   margin-bottom: 15px;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-family: "Archivo Black", sans-serif;
+  text-transform: uppercase;
+  padding: 10px;
+  font-size: 10px;
+  margin-bottom: 15px;
 }
 .Chart__Button:hover {
   background-color: #fff;
   cursor: pointer;
+  box-shadow: 5px 5px rgba(255, 255, 255, 0.945);
+}
+.Chart__Button--active {
+  background-color: #fff;
+  border: 1px solid blue;
+  color: blue;
+  box-shadow: 5px 5px rgba(255, 255, 255, 0.945);
 }
 .Chart__Chart {
   grid-column: 2;

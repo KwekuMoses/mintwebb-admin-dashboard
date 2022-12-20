@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     LineChart,
     ResponsiveContainer,
@@ -9,6 +9,7 @@ import {
     CartesianGrid, Label
 } from 'recharts';
 import './styles/Chart/Chart.css'
+import SwitchButton from './SwitchButton';
 
 function Chart({ monthlyVisits, yearlyVisits }) {
     let monthlyData = formatMonthlyStats(monthlyVisits)
@@ -20,32 +21,49 @@ function Chart({ monthlyVisits, yearlyVisits }) {
     let strokeColor = '#000AFF'
     let axisColor = '#000'
 
-
-
     const [xAxisData, setXAxisdata] = useState('day')
     const [chartData, setChartData] = useState(monthlyData)
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState("all visitors this month")
     const [lineDataKey, setLineDataKey] = useState("visitors")
+    const [dataInterval, setDataInterval] = useState('month')
 
-    const setData = (interval, xAxisData, title, lineDataKey) => {
+    const setData = (interval, xAxisData, title, lineDataKey, dataInterval) => {
+        console.log(lineDataKey)
+        setDataInterval(dataInterval)
         setXAxisdata(xAxisData)
         setChartData(interval)
         setTitle(title)
         setLineDataKey(lineDataKey)
+
     }
+
+
+    const handleClick = (interval, xAxisData, title, lineDataKey, dataInterval, e) => {
+        setData(interval, xAxisData, title, lineDataKey, dataInterval, e)
+        toggleActiveClass(e)
+    }
+
 
 
     return (
         <div className="Chart">
             <div className="Chart__ButtonGroup">
                 <span className="Chart__DataTitle">Display Visitor Data</span>
-                <button className="Chart__Button" onClick={() => setData(monthlyData, 'day', 'visitors this month', "visitors")}>Monthly Visitors</button> <br />
-                <button className="Chart__Button" onClick={() => setData(monthlyUniqueVisitors, 'day', 'unique visitors this month', "uniqueVisitors")}>Unique Monthly Visitors</button> <br />
-                <button className="Chart__Button" onClick={() => setData(yearlyData, 'month', 'visitors this year', "visitors")}>Yearly Visitors</button> <br />
-                <button className="Chart__Button" onClick={() => setData(yearlyUniqueVisitors, 'month', 'unique visitors this year', "uniqueVisitors")}>Unique Yearly Visitors</button> <br />
-                <button className="Chart__Button" onClick={() => setData(productCountMonthly, 'product', 'products by month', "visitors")}>By Product This Month</button> <br />
-                <button className="Chart__Button" onClick={() => setData(productCountYearly, 'product', 'products by year', "visitors")}>By Product This Year</button> <br />
+                <button className="Chart__Button" onClick={(e) => handleClick(monthlyData, 'day', 'all visitors this month', "visitors", 'month', e)}>Monthly Visitors</button> <br />
+                <button className="Chart__Button" onClick={(e) => handleClick(yearlyData, 'month', 'all visitors this year', "visitors", 'year', e)}>Yearly Visitors</button> <br />
+                {/* <button className="Chart__Button" onClick={() => setData(yearlyUniqueVisitors, 'month', 'unique visitors this year', "uniqueVisitors", 'year')}>Yearly Visitors</button> <br /> */}
+                {/* <button className="Chart__Button" onClick={() => setData(productCountMonthly, 'product', 'products by month', "visitors")}>By Product This Month</button> <br />
+                <button className="Chart__Button" onClick={() => setData(productCountYearly, 'product', 'products by year', "visitors")}>By Product This Year</button> <br /> */}
+                <div className="Chart__ViewingLabel">
+                    Viewing: {title}
+                </div>
+                {dataInterval === 'year' &&
+                    <SwitchButton setData={setData} yearlyUniqueVisitors={yearlyUniqueVisitors} yearlyData={yearlyData} lineDataKey={lineDataKey} setLineDataKey={setLineDataKey} dataInterval={dataInterval} />
+                }
+                {dataInterval === 'month' &&
+                    <SwitchButton setData={setData} monthlyUniqueVisitors={monthlyUniqueVisitors} monthlyData={monthlyData} lineDataKey={lineDataKey} setLineDataKey={setLineDataKey} dataInterval={dataInterval} />}
             </div>
+
             <ResponsiveContainer className="Chart__Chart" width="100%" aspect={3}>
                 <LineChart data={chartData.length === 0 ? monthlyData : chartData} margin={{ right: 300 }}>
                     <CartesianGrid stroke={'#fff'} strokeWidth={2} />
@@ -60,10 +78,9 @@ function Chart({ monthlyVisits, yearlyVisits }) {
                         />
                     </XAxis>
                     <YAxis
-                        label={{ value: 'visitors', angle: -90, position: 'insideLeft', textAnchor: 'middle', fontSize: '100%', fill: "#000AFF" }}
+                        label={{ value: title, angle: -90, position: 'insideLeft', textAnchor: 'middle', fontSize: '100%', fill: "#000AFF" }}
                         stroke={axisColor}
                         strokeWidth={3}
-
                     >
                     </YAxis>
                     <Tooltip />
@@ -77,7 +94,13 @@ function Chart({ monthlyVisits, yearlyVisits }) {
         </div>
     )
 }
-
+const toggleActiveClass = (e) => {
+    var elems = document.querySelectorAll(".Chart__Button--active");
+    [].forEach.call(elems, function (el) {
+        el.classList.remove("Chart__Button--active");
+    });
+    e.target.classList.add("Chart__Button--active")
+}
 const countUniqueVisitors = (visits) => {
     let _visits = []
     visits.map((visit) => {

@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
+.SwitchButton {
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-family: "Archivo Black", sans-serif;
+  text-transform: uppercase;
+  padding: 10px;
+  font-size: 10px;
+  margin-bottom: 15px;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-family: "Archivo Black", sans-serif;
+  text-transform: uppercase;
+  padding: 10px;
+  font-size: 10px;
+  margin-bottom: 15px;
+}
+.SwitchButton:hover {
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 5px 5px rgba(255, 255, 255, 0.945);
+}
+.SwitchButton:active {
+  color: blue;
+}
