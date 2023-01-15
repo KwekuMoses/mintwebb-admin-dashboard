@@ -10,8 +10,6 @@ function StatisticModule({ catalog, catalogVisits, productsVisited }) {
     var day = date.getDay();
 
 
-
-
     let catalogData = catalogVisits.data
     let monthlyVisits = [];
     let yearlyVisits = [];
@@ -33,7 +31,7 @@ function StatisticModule({ catalog, catalogVisits, productsVisited }) {
     var today = new Date();
     let todayDate = today.yyyymmdd()
 
-
+    // USEMEMO 
     useEffect(() => {
         setDailyVisits(dailyVisits.length)
     }, [dailyVisits])
@@ -54,6 +52,8 @@ function StatisticModule({ catalog, catalogVisits, productsVisited }) {
             monthlyVisits.push(visit)
         }
     })
+
+
     catalogData && catalogData.map((visit) => {
         let visitYear = parseInt(visit.year)
         if (visitYear === year) {
@@ -62,12 +62,13 @@ function StatisticModule({ catalog, catalogVisits, productsVisited }) {
     })
 
     catalogData && catalogData.map((visit) => {
-        let fullDate = (JSON.stringify(visit.date))
-        let visitDate = fullDate.substring(0, fullDate.length - 6)
+        // let fullDate = (JSON.stringify(visit.date))
+        // let visitDate = fullDate.substring(0, fullDate.length - 6)
 
-        if (visitDate === todayDate) {
+        if (JSON.stringify(visit.date) === todayDate) {
             dailyVisits.push(visit)
         }
+
     })
 
     return (

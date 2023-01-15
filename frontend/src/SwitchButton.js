@@ -16,13 +16,13 @@ function SwitchButton({
             case 'year':
                 lineDataKey === 'visitors' ?
                     setData(yearlyUniqueVisitors, 'month', 'unique visitors this year', "uniqueVisitors", dataInterval) :
-                    setData(yearlyData, 'month', 'all visitors this year', "visitors", dataInterval)
+                    setData(yearlyData, 'month', 'all visits this year', "visitors", dataInterval)
 
                 break;
             case 'month':
                 lineDataKey === 'visitors' ?
                     setData(monthlyUniqueVisitors, 'day', 'unique visitors this month', "uniqueVisitors", dataInterval) :
-                    setData(monthlyData, 'day', 'all visitors this month', "visitors", 'month', dataInterval)
+                    setData(monthlyData, 'day', 'all visits this month', "visitors", 'month', dataInterval)
 
                 break;
             default:
@@ -32,7 +32,7 @@ function SwitchButton({
 
     return (
         <button className="SwitchButton" onClick={() => toggleData(dataInterval)}>
-            view {lineDataKey === 'visitors' ? 'unique visitors instead' : 'all visitors instead'}
+            view {lineDataKey === 'visitors' ? 'unique visitors instead' : 'all visits instead'}
         </button>
     )
 }
